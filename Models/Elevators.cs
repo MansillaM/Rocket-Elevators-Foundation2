@@ -1,8 +1,8 @@
 namespace RocketElevatorsRestApi.Models
 {
-    public class Elevators
+    public class elevators
     {
-        public long Id { get; set; }
-        public string elevator_status { get; set;}
+        public long id { get; set; }
+        public string? elevator_status { get; set; }
     }
 }
