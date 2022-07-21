@@ -55,7 +55,6 @@ namespace RocketElevatorsRestApi.Controllers
         {
             return _context.elevators
                         .Where(elevator => elevator.elevator_status != "active");
-                        // .Select(elevator => new {elevator.id, elevator.serial_number, elevator.status});
             
         }
 
@@ -68,37 +67,6 @@ namespace RocketElevatorsRestApi.Controllers
 
                 return elevators;
         }
-        // public async Task<IActionResult> Putelevators(long id, elevators elevators)
-        // {
-        //     if (id != elevators.id)
-        //     {
-        //         return BadRequest();
-        //     }
-
-        //     // _context.Entry(elevators).State = EntityState.Modified;
-        //     // await _context.SaveChangesAsync();
-            
-
-        //     try
-        //     {
-        //         _context.Entry(elevators).State = EntityState.Modified;
-        //         await _context.SaveChangesAsync();
-        //     }
-        //     catch (DbUpdateConcurrencyException)
-        //     {
-        //         if (!elevatorsExists(id))
-        //         {
-        //             return NotFound();
-        //         }
-        //         else
-        //         {
-        //             throw;
-        //         }
-        //     }
-
-        //     return elevators;
-        // }
-
 
         // POST: api/elevators
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

@@ -49,6 +49,29 @@ namespace RocketElevatorsRestApi.Controllers
             return leads;
         }
 
+        //GET api/leads/leadsnotcustomerlast30days
+        [HttpGet("leadsnotcustomerlast30days")]
+        public async Task<ActionResult<IEnumerable<leads?>>> GetLeadsFromLast30Days()
+        {
+            var leads = await _context.leads.ToListAsync();
+            var customers = await _context.customers.ToListAsync();
+            DateTime currentDate = DateTime.Now;
+            leads = await _context.leads.Where(leads => leads.created_at > currentDate.AddDays(Convert.ToDouble(-30))).ToListAsync();
+            foreach (leads lead in leads)
+            {
+                foreach (customers customer in customers)
+                {
+                    if(lead.email != customer.email && lead.phone != customer.phone)
+                    {
+                        return leads;
+                    }
+                }
+            }
+            return leads;
+
+        }
+        
+
         // PUT: api/leads/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
