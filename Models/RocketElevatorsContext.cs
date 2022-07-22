@@ -16,5 +16,7 @@ namespace RocketElevatorsRestApi.Models
         public DbSet<RocketElevatorsRestApi.Models.leads>? leads { get; set; }
 
         public DbSet<RocketElevatorsRestApi.Models.customers>? customers { get; set; }
+        public DbSet<RocketElevatorsRestApi.Models.Battery>? Batteries { get; set; }
+        
     }
 }
