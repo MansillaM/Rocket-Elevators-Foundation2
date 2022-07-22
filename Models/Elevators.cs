@@ -4,5 +4,9 @@ namespace RocketElevatorsRestApi.Models
     {
         public long id { get; set; }
         public string? elevator_status { get; set; }
+
+        public int column_id {get; set; }
+        
+
     }
 }

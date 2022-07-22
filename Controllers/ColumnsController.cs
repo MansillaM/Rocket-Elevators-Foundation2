@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TodoApi.Models;
+using RocketElevatorsRestApi.Models;
 
 namespace RocketElevatorsRestApi.Controllers
 {
@@ -19,22 +19,22 @@ namespace RocketElevatorsRestApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Column>>> Getcolumns()
         {
-          if (_context.columns == null)
+          if (_context.Columns == null)
           {
               return NotFound();
           }
-            return await _context.columns.ToListAsync();
+            return await _context.Columns.ToListAsync();
         }
 
         // GET: api/Columns/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Column>> GetColumn(int id)
         {
-            if (_context.columns == null)
+            if (_context.Columns == null)
             {
                 return NotFound();
             }
-            var column = await _context.columns.FindAsync(id);
+            var column = await _context.Columns.FindAsync(id);
 
             if (column == null)
             {
@@ -48,32 +48,32 @@ namespace RocketElevatorsRestApi.Controllers
         [HttpGet("bldintervention")]
         public async Task<ActionResult<IEnumerable<Building>>> GetBldIntervention()
         {
-            List<Building> Blds = await _context.buildings.ToListAsync();
+            List<Building> Blds = await _context.Buildings.ToListAsync();
             List<Building> IntBlds = new List<Building>();
-            List<Battery> Bats = await _context.batteries.ToListAsync();
-            List<Column> Cols = await _context.columns.ToListAsync();
-            List<Elevator> Els = await _context.elevators.ToListAsync();
+            List<Battery> Bats = await _context.Batteries.ToListAsync();
+            List<Column> Cols = await _context.Columns.ToListAsync();
+            List<elevators> Els = await _context.elevators.ToListAsync();
             
             foreach (Battery battery in Bats){
-                if (battery.status == "intervention"){
-                    var building = await _context.buildings.FindAsync(battery.building_id);
+                if (battery.Status == "intervention"){
+                    var building = await _context.Buildings.FindAsync(battery.Building_Id);
                     IntBlds.Add(building);
                 }
             }
 
             foreach (Column column in Cols){
                 if (column.status == "intervention"){
-                    var battery = await _context.batteries.FindAsync(column.battery_id);
-                    var building = await _context.buildings.FindAsync(battery.building_id);
+                    var battery = await _context.Batteries.FindAsync(column.battery_id);
+                    var building = await _context.Buildings.FindAsync(battery.Building_Id);
                     IntBlds.Add(building);
                 }
             }
 
-             foreach (Elevator elevator in Els){
+             foreach (elevators elevator in Els){
                 if (elevator.elevator_status == "intervention"){
-                    var column = await _context.columns.FindAsync(elevator.column_id);
-                    var battery = await _context.batteries.FindAsync(column.battery_id);
-                    var building = await _context.buildings.FindAsync(battery.building_id);
+                    var column = await _context.Columns.FindAsync(elevator.column_id);
+                    var battery = await _context.Batteries.FindAsync(column.battery_id);
+                    var building = await _context.Buildings.FindAsync(battery.Building_Id);
                     IntBlds.Add(building);
                 }
             }
@@ -82,7 +82,7 @@ namespace RocketElevatorsRestApi.Controllers
         }
         private bool BuildingExists(int id)
         {
-            return _context.buildings.Any(e => e.id == id);
+            return _context.Buildings.Any(e => e.id == id);
         }
 
         // // GET: api/columns/batinactive
@@ -112,7 +112,7 @@ namespace RocketElevatorsRestApi.Controllers
         [HttpPut("{id}/{status}")]
         public async Task<ActionResult<Column>> PutColumn(int id, string status)
         {
-            var column = await _context.columns.FindAsync(id);
+            var column = await _context.Columns.FindAsync(id);
             column.status = status;
             _context.Entry(column).State = EntityState.Modified;
 
@@ -172,7 +172,7 @@ namespace RocketElevatorsRestApi.Controllers
 
         private bool ColumnExists(int id)
         {
-            return (_context.columns?.Any(e => e.id == id)).GetValueOrDefault();
+            return (_context.Columns?.Any(e => e.id == id)).GetValueOrDefault();
         }
     }
 }
