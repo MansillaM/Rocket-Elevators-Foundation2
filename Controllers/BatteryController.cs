@@ -22,32 +22,34 @@ namespace RocketElevatorsRestApi.Controllers
 
         // REST 
         [HttpGet("all")] // ENDPOINT: /api/battery/all
-        public IEnumerable<Battery?> getAllBatteries(){
-            var batteries = _context.Batteries.ToList();
+        public IEnumerable<battery?> getAllBatteries(){
+            var batteries = _context.batteries.ToList();
             return batteries; 
         }
 
         [HttpGet("{id}")]
-        public string? getBatteryStatus(long id){
-            var batteries = _context.Batteries.Find(id);
-            return batteries.Status;
+        public async Task<ActionResult<battery>> Getbatteries(long id)
+        {
+          if (_context.batteries == null)
+          {
+              return NotFound();
+          }
+            var batteries = await _context.batteries.FindAsync(id);
+
+            if (batteries == null)
+            {
+                return NotFound();
+            }
+
+            return batteries;
         }
 
-        [HttpPut("{id}/{status}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Battery))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult editBatteryStatus(long id, string status ){
-            var batteries = _context.Batteries.Find(id);
-            try {
-                _context.Entry(batteries).State = EntityState.Modified;
-                batteries.Status = status;
-                _context.SaveChanges();
-            } catch {
-                if(_context.Batteries.Find(id) == null) {
-                    return NotFound();
-                }
-            }        
-            return Ok(batteries);
-        }  
+        [HttpPut("{id}")]
+        public battery editbatteriess(long id, battery battery){
+            _context.Entry(battery).State = EntityState.Modified;
+            _context.SaveChanges();
+
+                return battery;
+        }
     }
 }

@@ -49,14 +49,6 @@ namespace RocketElevatorsRestApi.Controllers
             return elevators;
         }
 
-        //GET api/elevators/inactive
-        [HttpGet("inactive")]
-        public object GetInactive()
-        {
-            return _context.elevators
-                        .Where(elevator => elevator.elevator_status != "active");
-            
-        }
 
         // PUT: api/elevators/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

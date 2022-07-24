@@ -1,6 +1,6 @@
 namespace RocketElevatorsRestApi.Models
 {
-    public class Battery 
+    public class battery 
     {
         public long id { get; set; }
         public long? Building_Id { get; set; }

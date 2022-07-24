@@ -17,24 +17,33 @@ namespace RocketElevatorsRestApi.Controllers
 
         // GET: api/Columns
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Column>>> Getcolumns()
+        public async Task<ActionResult<IEnumerable<column>>> Getcolumns()
         {
-          if (_context.Columns == null)
+          if (_context.columns == null)
           {
               return NotFound();
           }
-            return await _context.Columns.ToListAsync();
+            return await _context.columns.ToListAsync();
+        }
+
+        // GET: api/columns/inactive
+        [HttpGet("inactive")]
+        public object GetInactive()
+        {
+            return _context.columns
+                        .Where(column => column.status != "active");
+            
         }
 
         // GET: api/Columns/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Column>> GetColumn(int id)
+        public async Task<ActionResult<column>> GetColumn(int id)
         {
-            if (_context.Columns == null)
+            if (_context.columns == null)
             {
                 return NotFound();
             }
-            var column = await _context.Columns.FindAsync(id);
+            var column = await _context.columns.FindAsync(id);
 
             if (column == null)
             {
@@ -44,36 +53,35 @@ namespace RocketElevatorsRestApi.Controllers
             return column;
         }
 
-        // GET: api/Buildings/intervention
         [HttpGet("bldintervention")]
-        public async Task<ActionResult<IEnumerable<Building>>> GetBldIntervention()
+        public async Task<ActionResult<IEnumerable<building>>> GetBldIntervention()
         {
-            List<Building> Blds = await _context.Buildings.ToListAsync();
-            List<Building> IntBlds = new List<Building>();
-            List<Battery> Bats = await _context.Batteries.ToListAsync();
-            List<Column> Cols = await _context.Columns.ToListAsync();
+            List<building> Blds = await _context.buildings.ToListAsync();
+            List<building> IntBlds = new List<building>();
+            List<battery> Bats = await _context.batteries.ToListAsync();
+            List<column> Cols = await _context.columns.ToListAsync();
             List<elevators> Els = await _context.elevators.ToListAsync();
             
-            foreach (Battery battery in Bats){
+            foreach (battery battery in Bats){
                 if (battery.Status == "intervention"){
-                    var building = await _context.Buildings.FindAsync(battery.Building_Id);
+                    var building = await _context.buildings.FindAsync(battery.Building_Id);
                     IntBlds.Add(building);
                 }
             }
 
-            foreach (Column column in Cols){
+            foreach (column column in Cols){
                 if (column.status == "intervention"){
-                    var battery = await _context.Batteries.FindAsync(column.battery_id);
-                    var building = await _context.Buildings.FindAsync(battery.Building_Id);
+                    var battery = await _context.batteries.FindAsync(column.battery_id);
+                    var building = await _context.buildings.FindAsync(battery.Building_Id);
                     IntBlds.Add(building);
                 }
             }
 
              foreach (elevators elevator in Els){
                 if (elevator.elevator_status == "intervention"){
-                    var column = await _context.Columns.FindAsync(elevator.column_id);
-                    var battery = await _context.Batteries.FindAsync(column.battery_id);
-                    var building = await _context.Buildings.FindAsync(battery.Building_Id);
+                    var column = await _context.columns.FindAsync(elevator.column_id);
+                    var battery = await _context.batteries.FindAsync(column.battery_id);
+                    var building = await _context.buildings.FindAsync(battery.Building_Id);
                     IntBlds.Add(building);
                 }
             }
@@ -82,7 +90,7 @@ namespace RocketElevatorsRestApi.Controllers
         }
         private bool BuildingExists(int id)
         {
-            return _context.Buildings.Any(e => e.id == id);
+            return _context.buildings.Any(e => e.id == id);
         }
 
         // // GET: api/columns/batinactive
@@ -109,30 +117,12 @@ namespace RocketElevatorsRestApi.Controllers
 
         // PUT: api/Columns/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}/{status}")]
-        public async Task<ActionResult<Column>> PutColumn(int id, string status)
-        {
-            var column = await _context.Columns.FindAsync(id);
-            column.status = status;
+        [HttpPut("{id}")]
+        public column editcolumn(long id, column column){
             _context.Entry(column).State = EntityState.Modified;
+            _context.SaveChanges();
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ColumnExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return column;
+                return column;
         }
 
         // // POST: api/Columns
@@ -172,7 +162,7 @@ namespace RocketElevatorsRestApi.Controllers
 
         private bool ColumnExists(int id)
         {
-            return (_context.Columns?.Any(e => e.id == id)).GetValueOrDefault();
+            return (_context.columns?.Any(e => e.id == id)).GetValueOrDefault();
         }
     }
 }

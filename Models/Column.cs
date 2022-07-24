@@ -1,9 +1,9 @@
 namespace RocketElevatorsRestApi.Models
 {
-    public class Column
+    public class column
     {
-        public int id {get; set; }
-        public int battery_id { get; set; }
+        public long id {get; set; }
+        public long battery_id { get; set; }
         public string? status { get; set; }
     }
 }
