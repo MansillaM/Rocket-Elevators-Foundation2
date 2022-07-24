@@ -50,6 +50,16 @@ namespace RocketElevatorsRestApi.Controllers
         }
 
 
+        //GET api/elevators/inactive
+        [HttpGet("inactive")]
+        public object GetInactive()
+        {
+            return _context.elevators
+                        .Where(elevator => elevator.elevator_status != "active");
+                        // .Select(elevator => new {elevator.id, elevator.serial_number, elevator.status});
+            
+        }
+
         // PUT: api/elevators/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
