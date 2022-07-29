@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.CodeAnalysis;
 using RocketElevatorsRestApi.Models;
+using RocketElevatorsRestApi.models;
 
 namespace RocketElevatorsRestApi.Models
 {
@@ -19,6 +20,7 @@ namespace RocketElevatorsRestApi.Models
         public DbSet<RocketElevatorsRestApi.Models.battery>? batteries { get; set; }
         public DbSet<RocketElevatorsRestApi.Models.column>? columns { get; set; }
         public DbSet<RocketElevatorsRestApi.Models.building>? buildings { get; set; }
+        public DbSet<RocketElevatorsRestApi.models.interventions>? interventions { get; set; }
         
     }
 }
