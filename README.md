@@ -7,7 +7,7 @@
 ps. before you move on please note that on my video i said that the put request wasnt updated but you can clearly see it on the postman.
 
 -Here is a visual presentation of it:
-
+```
 {
 	"info": {
 		"_postman_id": "981d6ce3-4b4f-4223-baf3-975a1cf39f23",
@@ -98,4 +98,4 @@ ps. before you move on please note that on my video i said that the put request 
 		}
 	]
 }
-
+```
