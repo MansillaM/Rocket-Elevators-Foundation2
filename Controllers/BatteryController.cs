@@ -27,14 +27,14 @@ namespace RocketElevatorsRestApi.Controllers
             return batteries; 
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<battery>> Getbatteries(long id)
+        [HttpGet("{building_id}")]
+        public async Task<ActionResult<battery>> Getbatteries(long building_id)
         {
           if (_context.batteries == null)
           {
               return NotFound();
           }
-            var batteries = await _context.batteries.FindAsync(id);
+            var batteries = await _context.batteries.FindAsync(building_id);
 
             if (batteries == null)
             {

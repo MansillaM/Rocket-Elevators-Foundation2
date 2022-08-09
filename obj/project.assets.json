@@ -9724,11 +9724,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\matma\\RocketElevatorsRestApi\\RocketElevatorsRestApi.csproj",
+      "projectUniqueName": "C:\\Users\\matma\\CodeBoxx\\Rocket-Elevators-Foundation2\\RocketElevatorsRestApi.csproj",
       "projectName": "RocketElevatorsRestApi",
-      "projectPath": "C:\\Users\\matma\\RocketElevatorsRestApi\\RocketElevatorsRestApi.csproj",
+      "projectPath": "C:\\Users\\matma\\CodeBoxx\\Rocket-Elevators-Foundation2\\RocketElevatorsRestApi.csproj",
       "packagesPath": "C:\\Users\\matma\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\matma\\RocketElevatorsRestApi\\obj\\",
+      "outputPath": "C:\\Users\\matma\\CodeBoxx\\Rocket-Elevators-Foundation2\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\matma\\AppData\\Roaming\\NuGet\\NuGet.Config"

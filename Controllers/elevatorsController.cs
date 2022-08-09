@@ -32,14 +32,14 @@ namespace RocketElevatorsRestApi.Controllers
         }
 
         // GET: api/elevators/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<elevators>> Getelevators(long id)
+        [HttpGet("{column_id}")]
+        public async Task<ActionResult<elevators>> Getelevators(int column_id)
         {
           if (_context.elevators == null)
           {
               return NotFound();
           }
-            var elevators = await _context.elevators.FindAsync(id);
+            var elevators = await _context.elevators.FindAsync(column_id);
 
             if (elevators == null)
             {

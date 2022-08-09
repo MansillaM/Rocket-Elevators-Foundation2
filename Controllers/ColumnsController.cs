@@ -36,14 +36,14 @@ namespace RocketElevatorsRestApi.Controllers
         }
 
         // GET: api/Columns/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<column>> GetColumn(int id)
+        [HttpGet("{battery_id}")]
+        public async Task<ActionResult<column>> GetColumn(int battery_id)
         {
             if (_context.columns == null)
             {
                 return NotFound();
             }
-            var column = await _context.columns.FindAsync(id);
+            var column = await _context.columns.FindAsync(battery_id);
 
             if (column == null)
             {
