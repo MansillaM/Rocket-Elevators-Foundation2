@@ -31,7 +31,7 @@ namespace RocketElevatorsRestApi.Controllers
             return await _context.elevators.ToListAsync();
         }
 
-        // GET: api/elevators/5
+        // GET: api/Elevators/42
         [HttpGet("{column_id}")]
         public async Task<ActionResult<elevators>> Getelevators(int column_id)
         {
@@ -39,14 +39,14 @@ namespace RocketElevatorsRestApi.Controllers
           {
               return NotFound();
           }
-            var elevators = await _context.elevators.FindAsync(column_id);
+            var elevators = await _context.elevators.Where(e => e.column_id == column_id).ToListAsync();
 
             if (elevators == null)
             {
                 return NotFound();
             }
 
-            return elevators;
+            return Ok(elevators);
         }
 
 

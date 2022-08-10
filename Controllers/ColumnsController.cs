@@ -15,7 +15,7 @@ namespace RocketElevatorsRestApi.Controllers
             _context = context;
         }
 
-        // GET: api/Columns
+        // GET: api/Columns/
         [HttpGet]
         public async Task<ActionResult<IEnumerable<column>>> Getcolumns()
         {
@@ -26,7 +26,7 @@ namespace RocketElevatorsRestApi.Controllers
             return await _context.columns.ToListAsync();
         }
 
-        // GET: api/columns/inactive
+        // GET: api/Columns/inactive
         [HttpGet("inactive")]
         public object GetInactive()
         {
@@ -35,7 +35,7 @@ namespace RocketElevatorsRestApi.Controllers
             
         }
 
-        // GET: api/Columns/5
+        // GET: api/Columns/52
         [HttpGet("{battery_id}")]
         public async Task<ActionResult<column>> GetColumn(int battery_id)
         {
@@ -43,14 +43,14 @@ namespace RocketElevatorsRestApi.Controllers
             {
                 return NotFound();
             }
-            var column = await _context.columns.FindAsync(battery_id);
+            var column = await _context.columns.Where(c => c.battery_id == battery_id).ToListAsync();
 
             if (column == null)
             {
                 return NotFound();
             }
 
-            return column;
+            return Ok(column);
         }
 
         [HttpGet("bldintervention")]
@@ -64,7 +64,7 @@ namespace RocketElevatorsRestApi.Controllers
             
             foreach (battery battery in Bats){
                 if (battery.Status == "intervention"){
-                    var building = await _context.buildings.FindAsync(battery.Building_Id);
+                    var building = await _context.buildings.FindAsync(battery.building_id);
                     IntBlds.Add(building);
                 }
             }
@@ -72,7 +72,7 @@ namespace RocketElevatorsRestApi.Controllers
             foreach (column column in Cols){
                 if (column.status == "intervention"){
                     var battery = await _context.batteries.FindAsync(column.battery_id);
-                    var building = await _context.buildings.FindAsync(battery.Building_Id);
+                    var building = await _context.buildings.FindAsync(battery.building_id);
                     IntBlds.Add(building);
                 }
             }
@@ -81,7 +81,7 @@ namespace RocketElevatorsRestApi.Controllers
                 if (elevator.elevator_status == "intervention"){
                     var column = await _context.columns.FindAsync(elevator.column_id);
                     var battery = await _context.batteries.FindAsync(column.battery_id);
-                    var building = await _context.buildings.FindAsync(battery.Building_Id);
+                    var building = await _context.buildings.FindAsync(battery.building_id);
                     IntBlds.Add(building);
                 }
             }

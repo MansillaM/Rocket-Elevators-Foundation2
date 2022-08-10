@@ -27,6 +27,7 @@ namespace RocketElevatorsRestApi.Controllers
             return batteries; 
         }
 
+        // GET: api/battery/20
         [HttpGet("{building_id}")]
         public async Task<ActionResult<battery>> Getbatteries(long building_id)
         {
@@ -34,14 +35,14 @@ namespace RocketElevatorsRestApi.Controllers
           {
               return NotFound();
           }
-            var batteries = await _context.batteries.FindAsync(building_id);
+            var batteries = await _context.batteries.Where(b => b.building_id == building_id).ToListAsync();
 
             if (batteries == null)
             {
                 return NotFound();
             }
 
-            return batteries;
+            return Ok(batteries);
         }
 
         [HttpPut("{id}")]
