@@ -33,13 +33,13 @@ namespace RocketElevatorsRestApi.Controllers
 
         // GET: api/customers/ignacio@vonrueden.net
         [HttpGet("{email}")]
-        public async Task<ActionResult<customers>> Getcustomersemail(string? email)
+        public async Task<ActionResult<customers>> GetCustomerIdFromEmail(string? email)
         {
           if (_context.customers == null)
           {
               return NotFound();
           }
-            var customers = await _context.customers.FindAsync(email);
+            var customers = await _context.customers.Where(c => c.email == email).ToListAsync();
 
             if (customers == null)
             {
