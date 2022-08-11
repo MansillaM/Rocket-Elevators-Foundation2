@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RocketElevatorsRestApi.Models;
 using RocketElevatorsRestApi.models;
+using Microsoft.AspNetCore.Cors;
 
 namespace RocketElevatorsRestApi.Controllers
 {
@@ -42,6 +43,7 @@ namespace RocketElevatorsRestApi.Controllers
 
         // PUT: api/interventions/2
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [DisableCors]
         [HttpPut("{author}/{customer_id}/{building_id}/{battery_id}/{column_id}/{elevator_id}/{report}")]
         public interventions Putinterventions(long id, interventions interventions)
         {

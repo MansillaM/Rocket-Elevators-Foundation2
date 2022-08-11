@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RocketElevatorsRestApi.Models;
+using Microsoft.AspNetCore.Cors;
 
 namespace RocketElevatorsRestApi.Controllers
 {
@@ -32,6 +33,7 @@ namespace RocketElevatorsRestApi.Controllers
         }
 
         // GET: api/buildings/1
+        [DisableCors]
         [HttpGet("{customer_id}")]
         public async Task<ActionResult<building>> Getcustomerbuilding(long customer_id)
         {

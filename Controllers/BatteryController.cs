@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RocketElevatorsRestApi.Models;
+using Microsoft.AspNetCore.Cors;
 
 namespace RocketElevatorsRestApi.Controllers
 {
@@ -26,8 +27,9 @@ namespace RocketElevatorsRestApi.Controllers
             var batteries = _context.batteries.ToList();
             return batteries; 
         }
-
+        
         // GET: api/battery/20
+        [DisableCors]
         [HttpGet("{building_id}")]
         public async Task<ActionResult<battery>> Getbatteries(long building_id)
         {
