@@ -7,7 +7,8 @@ namespace RocketElevatorsRestApi.Models
         public long? id { get; set; }
         [JsonIgnore]
         public long? customer_id { get; set; }
-        [JsonIgnore]
         public int address_id { get; set; }
+        public string? tech_name { get; set; }
+        public string? tech_phone { get; set; }
     }
 }

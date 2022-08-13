@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RocketElevatorsRestApi.Models;
 using RocketElevatorsRestApi.models;
-using Microsoft.AspNetCore.Cors;
 
 namespace RocketElevatorsRestApi.Controllers
 {
@@ -36,14 +35,17 @@ namespace RocketElevatorsRestApi.Controllers
 
         // GET: api/interventions
         [HttpGet]
-        public ActionResult<List<interventions>> GetInterventions () {
-                return _context.interventions.Where(i => i.start_date == null && i.status == "Pending").ToList();
-        
+        public async Task<ActionResult<IEnumerable<interventions>>> GetInterventions()
+        {
+          if (_context.interventions == null)
+          {
+              return NotFound();
+          }
+            return await _context.interventions.ToListAsync();
         }
 
-        // PUT: api/interventions/2
+        // PUT: api/interventions/
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [DisableCors]
         [HttpPut("{author}/{customer_id}/{building_id}/{battery_id}/{column_id}/{elevator_id}/{report}")]
         public interventions Putinterventions(long id, interventions interventions)
         {
@@ -55,7 +57,7 @@ namespace RocketElevatorsRestApi.Controllers
 
         // POST: api/interventions
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+        [HttpPost("{author}/{customer_id}/{building_id}/{battery_id}/{column_id}/{elevator_id}/{report}")]
         public async Task<ActionResult<interventions>> Postinterventions(interventions interventions)
         {
           if (_context.interventions == null)

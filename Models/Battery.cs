@@ -7,11 +7,8 @@ namespace RocketElevatorsRestApi.Models
         public long id { get; set; }
         [JsonIgnore]
         public long? building_id { get; set; }
-        [JsonIgnore]
         public string? Building_Type { get; set; }
-        [JsonIgnore]
         public string? Status { get; set; }
-        [JsonIgnore]
         public long? Employee_Id { get; set; }
         [JsonIgnore]
         public DateTime? Comm_Date { get; set; }

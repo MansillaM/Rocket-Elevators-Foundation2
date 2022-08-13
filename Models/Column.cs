@@ -5,9 +5,9 @@ namespace RocketElevatorsRestApi.Models
     public class column
     {
         public long id {get; set; }
-        [JsonIgnore]
         public long battery_id { get; set; }
-        [JsonIgnore]
         public string? status { get; set; }
+        public int floors { get; set; }
+        public string? information { get; set; }
     }
 }

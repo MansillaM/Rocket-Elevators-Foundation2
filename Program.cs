@@ -9,10 +9,6 @@ builder.Services.AddControllers();
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 28));
 builder.Services.AddDbContext<RocketElevatorsContext>(opt => 
     opt.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), serverVersion));
-//builder.Services.AddSwaggerGen(c =>
-//{
-//    c.SwaggerDoc("v1", new() { Title = "TodoApi", Version = "v1" });
-//});
 
 var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -25,7 +21,7 @@ builder.Services.AddCors(options =>
                                               "*"
                                               )
                                               .WithMethods("POST", "PUT", "DELETE", "GET")
-                                              .WithHeaders("*");
+                                              .AllowAnyHeader();
                       });
 });
 
