@@ -57,7 +57,7 @@ namespace RocketElevatorsRestApi.Controllers
 
         // POST: api/interventions
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost("{author}/{customer_id}/{building_id}/{battery_id}/{column_id}/{elevator_id}/{report}")]
+        [HttpPost("{author_id}/{customer_id}/{building_id}/{battery_id}/{column_id}/{elevator_id}/{report}")]
         public async Task<ActionResult<interventions>> Postinterventions(interventions interventions)
         {
           if (_context.interventions == null)
